@@ -1,6 +1,7 @@
+require_relative '../lib/memoize'
 class GitRepository
   extend Memoize
-
+  
   attr_reader :instances
 
   def initialize(options = {})

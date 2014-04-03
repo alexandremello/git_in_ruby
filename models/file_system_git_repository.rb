@@ -1,3 +1,4 @@
+require_relative "./git_repository"
 # encoding: US-ASCII
 
 class FileSystemGitRepository < GitRepository
@@ -55,7 +56,7 @@ class FileSystemGitRepository < GitRepository
   end
 
   def parse_tree_data(data)
-    entries_info = data.scan(/(\d+) ([^\0]+)\0([\x00-\xFF]{20})/)
+    entries_info = data.scan('(\d+) ([^\0]+)\0([\x00-\xFF]{20})', nil, 'n')
 
     total_bytes = entries_info.inject(0) do |sum, (mode, name, _)|
       sum + mode.size + name.size + 22   # 22 = " ".size + "\0".size + sha1.size
